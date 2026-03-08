@@ -282,3 +282,6 @@ Railsはユーザー管理やデータ管理を効率的に実装できるため
 
 - 不安な点
 ユーザー体験を継続させる仕組みの設計。
+
+### 11. 画面遷移図
+[Figmaはこちら](https://www.figma.com/design/bj8Vcp82USsXE4mboaByYY/%E5%8D%92%E6%A5%AD%E8%AA%B2%E9%A1%8C-%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3?node-id=0-1&t=rKsj0oIhkUsrxPD2-1)
