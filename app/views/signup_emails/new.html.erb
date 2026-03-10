@@ -5,6 +5,12 @@
         会員登録
       </h1>
 
+      <% if flash.now[:alert].present? %>
+  <div class="mb-4 rounded-lg bg-red-100 px-4 py-3 text-sm text-red-700">
+    <%= flash.now[:alert] %>
+  </div>
+<% end %>
+
       <p class="mb-8 text-center text-sm text-gray-600 sm:text-base">
         メールアドレスを入力して、認証メールを送信します
       </p>

@@ -1,7 +1,7 @@
 class UserMailer < ApplicationMailer
   def activation_needed_email(user)
     @user = user
-    @url = "#"
+    @url = edit_signup_profile_url(token: @user.activation_token)
 
     mail(to: @user.email, subject: "アカウント認証のご案内")
   end
