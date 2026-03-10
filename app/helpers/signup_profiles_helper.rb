@@ -1,0 +1,2 @@
+module SignupProfilesHelper
+end

@@ -1,0 +1,25 @@
+<main class="flex-1 bg-gray-100 py-10">
+  <div class="mx-auto w-full max-w-5xl px-4">
+    <h1 class="mb-8 text-center text-2xl font-bold text-green-700 sm:text-3xl">
+      育てる植物を選択
+    </h1>
+
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <% @plants.each do |plant| %>
+        <div class="rounded-2xl bg-white p-6 shadow-sm">
+          <div class="mb-4 flex h-40 items-center justify-center rounded-xl bg-green-50 text-green-700">
+            <span class="font-bold"><%= plant.name %></span>
+          </div>
+
+          <h2 class="mb-2 text-xl font-bold text-gray-800"><%= plant.name %></h2>
+          <p class="mb-6 text-sm text-gray-600"><%= plant.description %></p>
+
+          <%= button_to "この植物を育てる",
+                initial_plants_path(plant_id: plant.id),
+                method: :post,
+                class: "w-full rounded-lg bg-green-600 px-4 py-3 font-bold text-white hover:bg-green-700" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</main>

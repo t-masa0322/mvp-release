@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  plant: one
+  status: 1
+  accumulated_points: 1
+  selected_at: 2026-03-10 23:35:18
+  archived_at: 2026-03-10 23:35:18
+
+two:
+  user: two
+  plant: two
+  status: 1
+  accumulated_points: 1
+  selected_at: 2026-03-10 23:35:18
+  archived_at: 2026-03-10 23:35:18
