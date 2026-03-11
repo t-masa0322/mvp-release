@@ -2,6 +2,8 @@ class UserPlant < ApplicationRecord
   belongs_to :user
   belongs_to :plant
 
+  has_many :exercise_logs, dependent: :nullify
+
   enum status: { growing: 0, archived: 1 }
 
   validates :status, presence: true
