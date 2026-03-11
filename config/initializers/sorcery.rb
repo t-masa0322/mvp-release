@@ -418,6 +418,7 @@ Rails.application.config.sorcery.configure do |config|
     # Default: `nil`
     #
     user.reset_password_mailer = UserMailer
+    user.reset_password_time_between_emails = 60
 
     # Reset password email method on your mailer class.
     # Default: `:reset_password_email`
