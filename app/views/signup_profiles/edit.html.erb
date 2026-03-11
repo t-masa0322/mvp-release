@@ -18,7 +18,13 @@
         </div>
 
         <div>
-          <%= f.label :name, "ユーザーID", class: "mb-2 block text-sm font-bold text-gray-700" %>
+          <div class="mb-2 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+            <%= f.label :name, "ユーザーID", class: "text-sm font-bold text-gray-700" %>
+            <span class="text-xs text-gray-500 sm:text-sm">
+              ※IDは登録後に変更できません。
+            </span>
+          </div>
+
           <%= f.text_field :name, class: "w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-500 focus:outline-none" %>
         </div>
 

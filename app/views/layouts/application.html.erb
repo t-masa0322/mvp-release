@@ -17,6 +17,18 @@
       <%= render "shared/guest_header" %>
     <% end %>
 
+    <% if flash[:notice].present? %>
+      <div class="bg-green-100 px-4 py-3 text-sm text-green-700">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+
+    <% if flash[:alert].present? %>
+      <div class="bg-red-100 px-4 py-3 text-sm text-red-700">
+        <%= flash[:alert] %>
+      </div>
+    <% end %>
+
     <%= yield %>
 
     <%= render "shared/footer" %>

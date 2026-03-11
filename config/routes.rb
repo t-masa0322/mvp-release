@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'sessions/new'
   root "pages#top"
   get "up" => "rails/health#show", as: :rails_health_check
 
@@ -9,6 +10,10 @@ Rails.application.routes.draw do
   resource :signup_profile, only: %i[edit update]
   resources :initial_plants, only: %i[index create]
   resource :home, only: :show
+
+  get "login", to: "sessions#new"
+  post "login", to: "sessions#create"
+  delete "logout", to: "sessions#destroy"
 
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end

@@ -2,7 +2,7 @@
   <div class="mx-auto w-full max-w-xl px-4">
     <div class="rounded-2xl bg-white p-6 shadow-sm sm:p-8">
       <h1 class="mb-6 text-center text-2xl font-bold text-green-700 sm:text-3xl">
-        会員登録
+        ログイン
       </h1>
 
       <% if flash.now[:alert].present? %>
@@ -11,11 +11,7 @@
         </div>
       <% end %>
 
-      <p class="mb-8 text-center text-sm text-gray-600 sm:text-base">
-        メールアドレスを入力して、認証メールを送信します
-      </p>
-
-      <%= form_with url: signup_email_path, scope: :signup_email, local: true, class: "space-y-6" do |f| %>
+      <%= form_with url: login_path, scope: :session, local: true, class: "space-y-6" do |f| %>
         <div>
           <%= f.label :email, "メールアドレス", class: "mb-2 block text-sm font-bold text-gray-700" %>
           <%= f.email_field :email,
@@ -24,14 +20,26 @@
         </div>
 
         <div>
-          <%= f.submit "認証メールを送信",
+          <%= f.label :password, "パスワード", class: "mb-2 block text-sm font-bold text-gray-700" %>
+          <%= f.password_field :password,
+                class: "w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-500 focus:outline-none" %>
+        </div>
+
+        <div>
+          <%= f.submit "ログイン",
                 class: "w-full rounded-lg bg-green-600 px-4 py-3 font-bold text-white hover:bg-green-700" %>
         </div>
       <% end %>
 
       <div class="mt-6 text-center text-sm text-gray-700 sm:text-base">
-        会員登録済みの方はこちらから
-        <%= link_to "ログイン", login_path, class: "font-bold text-green-600 hover:opacity-80" %>
+        <p class="mb-4 underline underline-offset-2">
+          パスワードを忘れた場合
+        </p>
+
+        <p>
+          まだ登録していない方はこちらから
+          <%= link_to "新規会員登録", new_signup_email_path, class: "font-bold text-green-600 hover:opacity-80" %>
+        </p>
       </div>
     </div>
   </div>
