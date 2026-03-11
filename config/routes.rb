@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'mypages/show'
+  get 'mypages/edit'
   get 'password_resets/new'
   get 'password_resets/create'
   get 'password_resets/edit'
@@ -20,6 +22,8 @@ Rails.application.routes.draw do
   delete "logout", to: "sessions#destroy"
 
   resource :password_reset, only: %i[new create edit update]
+
+  resource :mypage, only: %i[show edit update]
 
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end

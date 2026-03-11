@@ -3,6 +3,6 @@
     <%= link_to "ホーム", logged_in? ? home_path : root_path, class: "hover:opacity-80" %>
     <%= link_to "運動記録", logged_in? ? "#" : new_signup_email_path, class: "hover:opacity-80" %>
     <%= link_to "投稿", "#", class: "hover:opacity-80" %>
-    <%= link_to "マイページ", logged_in? ? "#" : new_signup_email_path, class: "hover:opacity-80" %>
+    <%= link_to "マイページ", logged_in? ? mypage_path : new_signup_email_path, class: "hover:opacity-80" %>
   </div>
 </footer>

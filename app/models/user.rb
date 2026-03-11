@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
 
+  has_one_attached :profile_image
+
   has_many :user_plants, dependent: :destroy
   has_many :plants, through: :user_plants
 
