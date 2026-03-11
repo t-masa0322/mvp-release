@@ -1,0 +1,34 @@
+<main class="flex-1 bg-gray-100 py-10">
+  <div class="mx-auto w-full max-w-xl px-4">
+    <div class="rounded-2xl bg-white p-6 shadow-sm sm:p-8">
+      <h1 class="mb-6 text-center text-2xl font-bold text-green-700 sm:text-3xl">
+        新しいパスワード設定
+      </h1>
+
+      <% if flash.now[:alert].present? %>
+        <div class="mb-4 rounded-lg bg-red-100 px-4 py-3 text-sm text-red-700">
+          <%= flash.now[:alert] %>
+        </div>
+      <% end %>
+
+      <%= form_with model: @user, url: password_reset_path(token: params[:token]), method: :patch, local: true, class: "space-y-6" do |f| %>
+        <div>
+          <%= f.label :password, "新しいパスワード", class: "mb-2 block text-sm font-bold text-gray-700" %>
+          <%= f.password_field :password,
+                class: "w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-500 focus:outline-none" %>
+        </div>
+
+        <div>
+          <%= f.label :password_confirmation, "新しいパスワード確認", class: "mb-2 block text-sm font-bold text-gray-700" %>
+          <%= f.password_field :password_confirmation,
+                class: "w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-500 focus:outline-none" %>
+        </div>
+
+        <div>
+          <%= f.submit "パスワードを更新",
+                class: "w-full rounded-lg bg-green-600 px-4 py-3 font-bold text-white hover:bg-green-700" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</main>
