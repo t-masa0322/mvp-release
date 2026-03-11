@@ -1,6 +1,10 @@
 class ExerciseLogsController < ApplicationController
   before_action :require_login
 
+  def index
+    @exercise_logs = current_user.exercise_logs.order(created_at: :desc)
+  end
+
   def new
     @exercise_log = ExerciseLog.new
   end
