@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'plants/index'
   get 'mypages/show'
   get 'mypages/edit'
   get 'password_resets/new'
@@ -24,6 +25,9 @@ Rails.application.routes.draw do
   resource :password_reset, only: %i[new create edit update]
 
   resource :mypage, only: %i[show edit update]
+
+  resources :plants, only: %i[index]
+  post "plants/:id/select", to: "plants#select", as: :select_plant
 
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end
