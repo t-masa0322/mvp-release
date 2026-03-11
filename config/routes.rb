@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   resources :plants, only: %i[index]
   post "plants/:id/select", to: "plants#select", as: :select_plant
 
+  resources :exercise_logs, only: %i[index]
+
   resource :exercise_log, only: %i[new create] do
     get :complete, on: :collection
   end
