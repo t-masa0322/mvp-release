@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_03_11_154830) do
+ActiveRecord::Schema[7.1].define(version: 2026_03_11_171823) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,6 +40,19 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_11_154830) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "exercise_logs", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "exercise_type"
+    t.integer "duration_minutes"
+    t.text "memo"
+    t.integer "earned_points"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_plant_id"
+    t.index ["user_id"], name: "index_exercise_logs_on_user_id"
+    t.index ["user_plant_id"], name: "index_exercise_logs_on_user_plant_id"
   end
 
   create_table "plant_stages", force: :cascade do |t|
@@ -98,6 +111,8 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_11_154830) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "exercise_logs", "user_plants"
+  add_foreign_key "exercise_logs", "users"
   add_foreign_key "plant_stages", "plants"
   add_foreign_key "user_plants", "plants"
   add_foreign_key "user_plants", "users"
