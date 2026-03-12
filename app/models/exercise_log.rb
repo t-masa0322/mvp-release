@@ -13,6 +13,7 @@ class ExerciseLog < ApplicationRecord
   validates :exercise_type, presence: true
   validates :duration_minutes, presence: true, numericality: { greater_than: 0 }
   validates :earned_points, presence: true, numericality: { greater_than_or_equal_to: 0 }
+  validates :exercised_on, presence: true
 
   EXERCISE_POINT_RATES = {
     "walk" => 5,

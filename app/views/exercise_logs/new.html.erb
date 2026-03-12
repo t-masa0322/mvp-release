@@ -31,6 +31,12 @@
         </div>
 
         <div>
+          <%= f.label :exercised_on, "運動日", class: "mb-2 block text-sm font-bold text-gray-700" %>
+          <%= f.date_field :exercised_on,
+                class: "w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-500 focus:outline-none" %>
+        </div>
+
+        <div>
           <%= f.label :duration_minutes, "運動時間", class: "mb-2 block text-sm font-bold text-gray-700" %>
           <%= f.select :duration_minutes,
                 [["10分", 10], ["20分", 20], ["30分", 30], ["40分", 40], ["50分", 50], ["60分", 60]],

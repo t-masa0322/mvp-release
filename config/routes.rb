@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   post "plants/:id/select", to: "plants#select", as: :select_plant
 
   resources :exercise_logs, only: %i[index]
+  get "exercise_logs/date/:date", to: "exercise_logs#day", as: :exercise_logs_by_date
 
   resource :exercise_log, only: %i[new create] do
     get :complete, on: :collection
