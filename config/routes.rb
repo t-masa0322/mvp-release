@@ -20,11 +20,9 @@ Rails.application.routes.draw do
   resources :plants, only: %i[index]
   post "plants/:id/select", to: "plants#select", as: :select_plant
 
-  resources :exercise_logs, only: %i[index]
-  get "exercise_logs/date/:date", to: "exercise_logs#day", as: :exercise_logs_by_date
-
-  resource :exercise_log, only: %i[new create] do
+  resources :exercise_logs, only: %i[index new create edit update destroy] do
     get :complete, on: :collection
+    get "date/:date", to: "exercise_logs#day", on: :collection, as: :by_date
   end
 
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
