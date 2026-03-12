@@ -2,11 +2,31 @@ class ExerciseLogsController < ApplicationController
   before_action :require_login
 
   def index
-    @exercise_logs = current_user.exercise_logs.order(created_at: :desc)
+    @target_date =
+      if params[:month].present?
+        Date.strptime(params[:month], "%Y-%m")
+      else
+        Date.current
+      end
+
+    @calendar_start = @target_date.beginning_of_month.beginning_of_week(:sunday)
+    @calendar_end   = @target_date.end_of_month.end_of_week(:sunday)
+
+    @exercise_dates = current_user.exercise_logs
+                                  .where(exercised_on: @calendar_start..@calendar_end)
+                                  .pluck(:exercised_on)
+                                  .uniq
+  end
+
+  def day
+    @date = Date.parse(params[:date])
+    @exercise_logs = current_user.exercise_logs
+                                 .where(exercised_on: @date)
+                                 .order(created_at: :desc)
   end
 
   def new
-    @exercise_log = ExerciseLog.new
+    @exercise_log = ExerciseLog.new(exercised_on: Date.current)
   end
 
   def create
@@ -40,6 +60,6 @@ class ExerciseLogsController < ApplicationController
   private
 
   def exercise_log_params
-    params.require(:exercise_log).permit(:exercise_type, :duration_minutes, :memo)
+    params.require(:exercise_log).permit(:exercise_type, :duration_minutes, :memo, :exercised_on)
   end
 end
