@@ -1,0 +1,43 @@
+<main class="flex-1 bg-gray-100 py-10">
+  <div class="mx-auto w-full max-w-xl px-4">
+    <div class="rounded-2xl bg-white p-6 shadow-sm sm:p-8">
+      <h1 class="mb-8 text-2xl font-bold text-gray-800 sm:text-3xl">
+        投稿
+      </h1>
+
+      <% if flash.now[:alert].present? %>
+        <div class="mb-4 rounded-lg bg-red-100 px-4 py-3 text-sm text-red-700">
+          <%= flash.now[:alert] %>
+        </div>
+      <% end %>
+
+      <%= form_with model: @post,
+            url: posts_path,
+            local: true,
+            data: { turbo: false },
+            class: "space-y-6" do |f| %>
+        <div>
+          <%= f.label :body, "本文", class: "mb-2 block text-sm font-bold text-gray-700" %>
+          <%= f.text_area :body,
+                rows: 8,
+                class: "w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-500 focus:outline-none" %>
+        </div>
+
+        <div>
+          <%= f.label :image, "画像", class: "mb-2 block text-sm font-bold text-gray-700" %>
+          <%= f.file_field :image,
+                class: "w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-500 focus:outline-none" %>
+        </div>
+
+        <div class="space-y-4 pt-4">
+          <%= f.submit "投稿する",
+                class: "w-full rounded-lg bg-green-600 px-4 py-3 font-bold text-white hover:bg-green-700" %>
+
+          <%= link_to "戻る",
+                posts_path,
+                class: "block w-full rounded-lg bg-gray-600 px-4 py-3 text-center font-bold text-white hover:bg-gray-700" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</main>
