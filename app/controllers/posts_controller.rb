@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
-  before_action :require_login, only: %i[new create edit update]
-  before_action :set_post, only: %i[show edit update]
-  before_action :ensure_own_post, only: %i[edit update]
+  before_action :require_login, only: %i[new create edit update destroy]
+  before_action :set_post, only: %i[show edit update destroy]
+  before_action :ensure_own_post, only: %i[edit update destroy]
 
   def index
     @posts = Post.includes(:user).with_attached_image.order(created_at: :desc)
@@ -35,6 +35,11 @@ class PostsController < ApplicationController
       flash.now[:alert] = @post.errors.full_messages.join(", ")
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @post.destroy!
+    redirect_to posts_path, notice: "投稿を削除しました"
   end
 
   private

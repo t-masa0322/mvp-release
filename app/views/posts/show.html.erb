@@ -22,7 +22,7 @@
           <%= image_tag @post.image, class: "h-auto w-full object-cover" %>
         </div>
       <% end %>
-
+      
       <% if logged_in? && @post.user == current_user %>
         <div class="mb-4">
           <%= link_to "編集する",
@@ -31,11 +31,21 @@
         </div>
       <% end %>
 
-      <div>
+      <div class="mb-4">
         <%= link_to "一覧に戻る",
               posts_path,
               class: "block w-full rounded-lg bg-green-600 px-4 py-3 text-center font-bold text-white hover:bg-green-700" %>
       </div>
+
+      <% if logged_in? && @post.user == current_user %>
+        <div class="text-center">
+          <%= button_to "投稿を削除する",
+                post_path(@post),
+                method: :delete,
+                data: { turbo_confirm: "この投稿を削除しますか？" },
+                class: "text-lg text-gray-700 underline hover:text-red-600 bg-transparent border-0 p-0" %>
+        </div>
+      <% end %>
     </div>
   </div>
 </main>
