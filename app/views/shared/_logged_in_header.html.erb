@@ -24,8 +24,8 @@
     <nav>
       <ul class="space-y-4 text-lg font-bold">
         <li><%= link_to "ホーム", home_path, class: "block" %></li>
-        <li><%= link_to "運動記録", "#", class: "block" %></li>
-        <li><%= link_to "投稿", "#", class: "block" %></li>
+        <li><%= link_to "運動記録", new_exercise_log_path, class: "block" %></li>
+        <li><%= link_to "投稿", posts_path, class: "block" %></li>
         <li><%= link_to "マイページ", mypage_path, class: "block" %></li>
         <li><%= button_to "ログアウト", logout_path, method: :delete, class: "block w-full text-left" %></li>
       </ul>
