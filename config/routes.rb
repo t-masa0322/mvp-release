@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     get "date/:date", to: "exercise_logs#day", on: :collection, as: :by_date
   end
 
-  resources :posts, only: %i[index new create]
+  resources :posts, only: %i[index new create show edit update]
 
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end
