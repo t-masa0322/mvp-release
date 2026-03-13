@@ -1,14 +1,14 @@
 class SignupProfilesController < ApplicationController
-  before_action :set_user_by_token
+  before_action :set_signup_user
 
   def edit
   end
 
   def update
     if @user.update(signup_profile_params)
+      session.delete(:signup_user_id)
       auto_login(@user)
-      @user.activate!
-      redirect_to initial_plants_path, notice: "基本情報を登録しました"
+      redirect_to initial_plants_path
     else
       flash.now[:alert] = @user.errors.full_messages.join(", ")
       render :edit, status: :unprocessable_entity
@@ -17,14 +17,12 @@ class SignupProfilesController < ApplicationController
 
   private
 
-  def set_user_by_token
-    @user = User.load_from_activation_token(params[:token])
-    return if @user
-
-    redirect_to root_path, alert: "無効なURLです"
+  def set_signup_user
+    @user = User.find_by(id: session[:signup_user_id])
+    redirect_to new_signup_path, alert: "最初からやり直してください" unless @user
   end
 
   def signup_profile_params
-    params.require(:user).permit(:name, :display_name, :password, :password_confirmation)
+    params.require(:user).permit(:name, :display_name)
   end
 end

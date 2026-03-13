@@ -8,15 +8,15 @@ class User < ApplicationRecord
   has_many :exercise_logs, dependent: :destroy
   has_many :posts, dependent: :destroy
 
-  attr_accessor :password, :password_confirmation
+  attr_accessor :password, :password_confirmation, :profile_step
 
   validates :email, presence: true, uniqueness: true
 
   validates :name, presence: true, uniqueness: true,
             format: { with: /\A[a-zA-Z0-9]+\z/, message: "は半角英数字で入力してください" },
-            if: :profile_registration_step?
+            if: :profile_step?
 
-  validates :display_name, presence: true, length: { maximum: 20 }, if: :profile_registration_step?
+  validates :display_name, presence: true, length: { maximum: 20 }, if: :profile_step?
 
   validates :password, length: { minimum: 6 }, if: :password_required?
   validates :password, confirmation: true, if: :password_required?
@@ -24,8 +24,8 @@ class User < ApplicationRecord
 
   validates :total_growth_points, numericality: { greater_than_or_equal_to: 0 }
 
-  def profile_registration_step?
-    name.present? || display_name.present? || password.present? || password_confirmation.present?
+  def profile_step?
+    profile_step
   end
 
   def password_required?
