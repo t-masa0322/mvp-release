@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_03_12_144345) do
+ActiveRecord::Schema[7.1].define(version: 2026_03_13_170027) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -74,6 +74,14 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_12_144345) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "posts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
   create_table "user_plants", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "plant_id", null: false
@@ -115,6 +123,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_12_144345) do
   add_foreign_key "exercise_logs", "user_plants"
   add_foreign_key "exercise_logs", "users"
   add_foreign_key "plant_stages", "plants"
+  add_foreign_key "posts", "users"
   add_foreign_key "user_plants", "plants"
   add_foreign_key "user_plants", "users"
 end

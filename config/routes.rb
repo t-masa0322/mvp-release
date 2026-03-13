@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'posts/index'
+  get 'posts/new'
+  get 'posts/create'
   root "pages#top"
   get "up" => "rails/health#show", as: :rails_health_check
 
@@ -24,6 +27,8 @@ Rails.application.routes.draw do
     get :complete, on: :collection
     get "date/:date", to: "exercise_logs#day", on: :collection, as: :by_date
   end
+
+  resources :posts, only: %i[index new create]
 
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end
