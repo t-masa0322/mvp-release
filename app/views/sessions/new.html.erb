@@ -20,10 +20,11 @@
           </div>
         <% end %>
 
-        <%= form_with url: login_path,
-              local: true,
-              data: { turbo: false },
-              class: "space-y-8" do |f| %>
+        <%= form_with scope: :session,
+          url: login_path,
+          local: true,
+          data: { turbo: false },
+          class: "space-y-8" do |f| %>
 
           <div>
             <%= f.label :email, "メールアドレス", class: "mb-3 block text-lg font-bold text-slate-800" %>
