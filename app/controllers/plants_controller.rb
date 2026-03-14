@@ -3,7 +3,7 @@ class PlantsController < ApplicationController
   before_action :require_login, only: %i[index show select]
 
   def index
-    @plants = Plant.includes(:plant_stages).with_attached_image.order(:id)
+    @plants = Plant.includes(:plant_stages).order(:id)
   end
 
   def show
@@ -24,6 +24,6 @@ class PlantsController < ApplicationController
   private
 
   def set_plant
-    @plant = Plant.includes(:plant_stages).with_attached_image.find(params[:id])
+    @plant = Plant.includes(:plant_stages).find(params[:id])
   end
 end

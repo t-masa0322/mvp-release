@@ -42,10 +42,7 @@
               </p>
             <% else %>
               <div class="mt-8 rounded-3xl bg-slate-50 px-6 py-7">
-                <p class="text-base leading-8 text-slate-600 sm:text-lg">
-                  今日はまだ運動記録がありません。<br>
-                  小さな一歩から、植物の成長を始めましょう。
-                </p>
+                <p class="text-base leading-8 text-slate-600 sm:text-lg">今日はまだ運動記録がありません。</p>
               </div>
             <% end %>
           </div>
@@ -108,9 +105,9 @@
 
           <div class="mt-10 grid gap-8 lg:grid-cols-[260px_1fr] lg:items-center">
             <div class="flex justify-center lg:justify-start">
-              <div class="flex h-60 w-60 items-center justify-center rounded-[28px] bg-slate-50 ring-1 ring-slate-100">
-                <% if @current_user_plant.plant.image.attached? %>
-                  <%= image_tag @current_user_plant.plant.image,
+              <div class="flex h-60 w-60 items-center justify-center rounded-[28px] ring-1 ring-slate-100">
+                <% if @current_user_plant&.plant&.image_file_name.present? %>
+                  <%= image_tag @current_user_plant.plant.image_file_name,
                         class: "h-48 w-48 object-contain sm:h-52 sm:w-52" %>
                 <% else %>
                   <div class="flex h-44 w-44 items-center justify-center rounded-[24px] bg-white text-sm text-slate-500">
