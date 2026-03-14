@@ -54,9 +54,14 @@
         <% end %>
 
         <div class="mb-8 flex flex-col items-center gap-6 sm:flex-row sm:items-center">
-          <div class="flex h-36 w-36 items-center justify-center rounded-full bg-gray-200 text-sm text-gray-700">
-            植物の画像
-          </div>
+          <% if @current_user_plant.plant.image.attached? %>
+            <%= image_tag @current_user_plant.plant.image,
+                  class: "h-36 w-36 rounded-full object-cover" %>
+          <% else %>
+            <div class="flex h-36 w-36 items-center justify-center rounded-full bg-gray-200 text-sm text-gray-700">
+              植物の画像
+            </div>
+          <% end %>
 
           <div class="text-center sm:text-left">
             <p class="mb-3 text-2xl font-bold text-gray-800">

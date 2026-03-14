@@ -16,11 +16,11 @@ class ExerciseLog < ApplicationRecord
   validates :exercised_on, presence: true
 
   EXERCISE_POINT_RATES = {
-    "walk" => 5,
-    "strength_training" => 8,
-    "stretching" => 4,
-    "running" => 10,
-    "yoga" => 6
+    "walk" => 3,
+    "strength_training" => 6,
+    "stretching" => 2,
+    "running" => 8,
+    "yoga" => 4
   }.freeze
 
   def self.calculate_points(exercise_type, duration_minutes)
