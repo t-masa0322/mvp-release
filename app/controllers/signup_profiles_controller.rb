@@ -2,13 +2,17 @@ class SignupProfilesController < ApplicationController
   before_action :set_signup_user
 
   def edit
+    @user.profile_step = true
   end
 
   def update
+    @user.profile_step = true
+
     if @user.update(signup_profile_params)
       session.delete(:signup_user_id)
       auto_login(@user)
-      redirect_to initial_plants_path
+      session[:initial_plant_selection] = true
+      redirect_to initial_plants_path, notice: "基本情報を登録しました。育てる植物を選んでください"
     else
       flash.now[:alert] = @user.errors.full_messages.join(", ")
       render :edit, status: :unprocessable_entity

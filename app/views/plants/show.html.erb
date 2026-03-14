@@ -1,0 +1,84 @@
+<main class="flex-1 bg-gray-100 py-10">
+  <div class="mx-auto w-full max-w-3xl px-4">
+    <div class="rounded-2xl bg-white p-6 shadow-sm sm:p-8">
+      <h1 class="mb-6 text-2xl font-bold text-gray-800 sm:text-3xl">
+        <%= @plant.name %>
+      </h1>
+
+      <div class="mb-8 flex justify-center">
+        <% if @plant.image.attached? %>
+          <%= image_tag @plant.image, class: "h-64 w-64 rounded-full object-cover" %>
+        <% else %>
+          <div class="flex h-64 w-64 items-center justify-center rounded-full bg-gray-200 text-2xl text-gray-700">
+            植物の画像
+          </div>
+        <% end %>
+      </div>
+
+      <% final_stage = @plant.plant_stages.last %>
+      <% if final_stage.present? %>
+        <p class="mb-6 text-center text-xl font-bold text-gray-800 sm:text-2xl">
+          開花までに必要なポイント
+          <span><%= number_with_delimiter(final_stage.required_points) %>pt</span>
+        </p>
+      <% end %>
+
+      <p class="mb-8 text-gray-700">
+        <%= @plant.description %>
+      </p>
+
+      <div class="mb-10 overflow-x-auto">
+        <table class="w-full min-w-[420px] text-center">
+          <tbody>
+            <tr>
+              <th class="px-2 py-3 text-left text-sm font-bold text-gray-700">成長段階</th>
+              <% @plant.plant_stages.each do |stage| %>
+                <td class="px-2 py-3">
+                  <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gray-200 text-sm leading-tight text-gray-800">
+                    <div>
+                      <div><%= stage.stage_order %></div>
+                      <div><%= stage.name %></div>
+                    </div>
+                  </div>
+                </td>
+              <% end %>
+            </tr>
+
+            <tr>
+              <th class="px-2 py-3 text-left text-sm font-bold text-gray-700">必要な累計pt</th>
+              <% @plant.plant_stages.each do |stage| %>
+                <td class="px-2 py-3 text-sm text-gray-800">
+                  <%= stage.stage_order == 1 ? "スタート" : "#{number_with_delimiter(stage.required_points)}pt" %>
+                </td>
+              <% end %>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <% if session[:initial_plant_selection] %>
+        <div class="mb-4">
+          <%= button_to "この植物を育てる",
+                initial_plants_path(plant_id: @plant.id),
+                method: :post,
+                class: "w-full rounded-lg bg-green-600 px-4 py-3 font-bold text-white hover:bg-green-700" %>
+        </div>
+
+        <%= link_to "一覧に戻る",
+              initial_plants_path,
+              class: "block w-full rounded-lg bg-gray-600 px-4 py-3 text-center font-bold text-white hover:bg-gray-700" %>
+      <% else %>
+        <div class="mb-4">
+          <%= button_to "この植物を育てる",
+                select_plant_path(@plant),
+                method: :post,
+                class: "w-full rounded-lg bg-green-600 px-4 py-3 font-bold text-white hover:bg-green-700" %>
+        </div>
+
+        <%= link_to "一覧に戻る",
+              plants_path,
+              class: "block w-full rounded-lg bg-gray-600 px-4 py-3 text-center font-bold text-white hover:bg-gray-700" %>
+      <% end %>
+    </div>
+  </div>
+</main>
