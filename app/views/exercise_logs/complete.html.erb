@@ -13,8 +13,8 @@
         </p>
 
         <div class="mt-10 flex justify-center">
-          <% if @current_user_plant&.plant&.image&.attached? %>
-            <%= image_tag @current_user_plant.plant.image,
+          <% if @current_user_plant&.plant&.image_exists? %>
+            <%= image_tag @current_user_plant.plant.image_file_name,
                   class: "h-56 w-56 rounded-full border border-gray-200 object-contain shadow-sm sm:h-64 sm:w-64" %>
           <% else %>
             <div class="flex h-56 w-56 items-center justify-center rounded-full bg-gray-100 text-xl text-gray-600 sm:h-64 sm:w-64">
