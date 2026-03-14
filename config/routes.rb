@@ -24,5 +24,8 @@ Rails.application.routes.draw do
 
   resources :posts, only: %i[index new create show edit update destroy]
 
+  get "privacy", to: "pages#privacy", as: :privacy_policy
+  get "terms", to: "pages#terms", as: :terms
+
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end
