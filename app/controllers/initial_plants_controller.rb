@@ -3,7 +3,7 @@ class InitialPlantsController < ApplicationController
   before_action :ensure_initial_plant_selection
 
   def index
-    @plants = Plant.includes(:plant_stages).with_attached_image.order(:id)
+    @plants = Plant.includes(:plant_stages).order(:id)
   end
 
   def create
