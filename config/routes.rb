@@ -11,7 +11,6 @@ Rails.application.routes.draw do
   post "login", to: "sessions#create"
   delete "logout", to: "sessions#destroy"
 
-  resource :password_reset, only: %i[new create edit update]
   resource :mypage, only: %i[show edit update]
 
   resources :plants, only: %i[index show]
