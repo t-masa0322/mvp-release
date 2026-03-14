@@ -19,7 +19,7 @@ class InitialPlantsController < ApplicationController
 
     session.delete(:initial_plant_selection)
 
-    redirect_to home_path, notice: "#{plant.name}を選択しました"
+    redirect_to home_path
   end
 
   private

@@ -18,7 +18,7 @@ class PostsController < ApplicationController
     @post = current_user.posts.new(post_params)
 
     if @post.save
-      redirect_to post_path(@post), notice: "投稿しました"
+      redirect_to posts_path, notice: "投稿しました"
     else
       flash.now[:alert] = @post.errors.full_messages.join(", ")
       render :new, status: :unprocessable_entity

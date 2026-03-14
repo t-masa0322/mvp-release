@@ -1,47 +1,152 @@
-<main class="flex-1">
-  <div class="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 md:py-10 lg:px-8 lg:py-12">
-    <section class="overflow-hidden rounded-2xl bg-white shadow-sm">
-      <div class="grid min-h-[calc(100vh-220px)] grid-cols-1 lg:grid-cols-2">
-        <div class="flex items-center justify-center bg-gray-100 p-8 sm:p-10 lg:p-16">
-          <div class="w-full max-w-xl text-center lg:text-left">
-            <p class="mb-4 inline-block rounded-full bg-green-100 px-4 py-2 text-sm font-bold text-green-700 sm:text-base">
+<main class="flex-1 bg-gray-50">
+  <div class="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8 lg:py-10">
+    <section class="overflow-hidden rounded-[32px] border border-gray-100 bg-white shadow-[0_8px_30px_rgba(15,23,42,0.06)]">
+      <div class="grid grid-cols-1 lg:grid-cols-2">
+        <div class="flex items-center bg-white px-6 py-10 sm:px-10 sm:py-14 lg:px-16 lg:py-20">
+          <div class="w-full max-w-xl">
+            <p class="mb-5 inline-flex items-center rounded-full bg-green-50 px-4 py-2 text-sm font-bold text-green-700">
               毎日の運動を、成長の楽しみに
             </p>
-            <h1 class="mb-6 text-4xl font-bold leading-tight text-green-700 sm:text-5xl lg:text-6xl">
-              Walk Plant Growth
+
+            <h1 class="mb-6 text-4xl font-extrabold leading-[1.15] tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
+              Fit Bloomで、<br>
+              運動を植物の成長に。
             </h1>
-            <p class="mb-8 text-base leading-relaxed text-gray-700 sm:text-lg lg:text-xl">
-              運動を記録して、植物を育てよう。<br class="hidden sm:block">
-              毎日の小さな積み重ねが、植物の成長として見えるアプリです。
+
+            <p class="max-w-lg text-base leading-8 text-gray-600 sm:text-lg">
+              散歩や筋トレを記録するとポイントが貯まり、選んだ植物が少しずつ育っていきます。
+              毎日の小さな積み重ねを、目に見える変化として楽しめる習慣化アプリです。
             </p>
 
-            <div class="flex flex-col gap-3 sm:flex-row sm:justify-center lg:justify-start">
-              <a href="#" class="rounded-lg bg-green-600 px-6 py-3 text-center text-base font-bold text-white hover:bg-green-700 sm:text-lg">
-                はじめる
-              </a>
-              <a href="#" class="rounded-lg border border-green-600 px-6 py-3 text-center text-base font-bold text-green-700 hover:bg-green-50 sm:text-lg">
-                ログイン
-              </a>
+            <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+              <%= link_to "はじめる",
+                    new_signup_path,
+                    class: "inline-flex min-w-[160px] items-center justify-center rounded-xl bg-green-600 px-6 py-4 text-base font-bold text-white transition hover:bg-green-700" %>
+
+              <%= link_to "ログイン",
+                    login_path,
+                    class: "inline-flex min-w-[160px] items-center justify-center rounded-xl border border-gray-300 bg-white px-6 py-4 text-base font-bold text-gray-700 transition hover:border-green-300 hover:bg-green-50 hover:text-green-700" %>
+            </div>
+
+            <div class="mt-10 grid gap-4 sm:grid-cols-3">
+              <div class="rounded-2xl bg-gray-50 px-5 py-4">
+                <p class="text-2xl font-extrabold text-green-700">1</p>
+                <p class="mt-1 text-sm font-bold text-gray-800">運動を記録</p>
+              </div>
+
+              <div class="rounded-2xl bg-gray-50 px-5 py-4">
+                <p class="text-2xl font-extrabold text-green-700">2</p>
+                <p class="mt-1 text-sm font-bold text-gray-800">植物を育成</p>
+              </div>
+
+              <div class="rounded-2xl bg-gray-50 px-5 py-4">
+                <p class="text-2xl font-extrabold text-green-700">3</p>
+                <p class="mt-1 text-sm font-bold text-gray-800">開花を楽しむ</p>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="flex items-center justify-center bg-green-50 p-8 sm:p-10 lg:p-16">
-          <div class="flex h-[280px] w-full max-w-xl items-center justify-center rounded-2xl border-2 border-dashed border-green-200 bg-white text-center sm:h-[360px] lg:h-[480px]">
-            <div>
-              <p class="text-xl font-bold text-green-700 sm:text-2xl lg:text-3xl">
-                植物イメージエリア
-              </p>
-              <p class="mt-3 text-sm text-gray-500 sm:text-base">
-                後でキービジュアルやアプリ説明画像を配置
-              </p>
+        <div class="relative overflow-hidden bg-green-50 px-6 py-10 sm:px-10 sm:py-14 lg:px-14 lg:py-16">
+          <div class="relative mx-auto flex h-full min-h-[320px] max-w-xl items-center justify-center">
+            <div class="w-full rounded-[28px] border border-green-100 bg-white p-6 shadow-[0_10px_30px_rgba(34,197,94,0.08)]">
+              <div class="grid gap-4">
+                <div class="rounded-2xl bg-green-600 px-5 py-4 text-white">
+                  <p class="text-sm font-bold text-green-100">今日の運動記録</p>
+                  <p class="mt-2 text-2xl font-extrabold">散歩 20分</p>
+                  <p class="mt-1 text-sm text-green-100">60pt 獲得</p>
+                </div>
+
+                <div class="grid gap-4 sm:grid-cols-[160px_1fr]">
+                  <div class="flex items-center justify-center rounded-2xl bg-green-100 p-4">
+                    <div class="flex h-28 w-28 items-center justify-center rounded-full bg-white text-5xl">
+                      🌷
+                    </div>
+                  </div>
+
+                  <div class="rounded-2xl bg-white p-5 ring-1 ring-green-100">
+                    <p class="text-sm font-bold text-gray-500">育成中の植物</p>
+                    <p class="mt-2 text-2xl font-extrabold text-gray-900">チューリップ</p>
+                    <p class="mt-2 text-sm text-gray-600">毎日の運動でポイントを貯めて、植物を少しずつ育てていきます。</p>
+
+                    <div class="mt-4">
+                      <div class="mb-2 flex items-center justify-between text-sm font-bold text-gray-700">
+                        <span>開花まで</span>
+                        <span>2,000pt</span>
+                      </div>
+                      <div class="h-3 rounded-full bg-gray-100">
+                        <div class="h-3 w-1/3 rounded-full bg-green-500"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="grid gap-3 sm:grid-cols-3">
+                  <div class="rounded-2xl bg-white p-4 text-center ring-1 ring-green-100">
+                    <p class="text-xs font-bold text-gray-500">STEP 1</p>
+                    <p class="mt-2 text-base font-bold text-gray-800">登録する</p>
+                  </div>
+                  <div class="rounded-2xl bg-white p-4 text-center ring-1 ring-green-100">
+                    <p class="text-xs font-bold text-gray-500">STEP 2</p>
+                    <p class="mt-2 text-base font-bold text-gray-800">植物を選ぶ</p>
+                  </div>
+                  <div class="rounded-2xl bg-white p-4 text-center ring-1 ring-green-100">
+                    <p class="text-xs font-bold text-gray-500">STEP 3</p>
+                    <p class="mt-2 text-base font-bold text-gray-800">運動して育てる</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <div class="mt-8 flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm text-gray-700 underline sm:mt-10 sm:text-base lg:text-lg">
+    <section class="mt-10 rounded-[32px] border border-gray-100 bg-white px-6 py-8 shadow-[0_8px_30px_rgba(15,23,42,0.05)] sm:px-8 sm:py-10 lg:px-10">
+      <div class="mb-8 text-center">
+        <p class="text-sm font-bold tracking-[0.2em] text-green-700">HOW TO USE</p>
+        <h2 class="mt-3 text-2xl font-extrabold text-gray-900 sm:text-3xl">
+          使い方はシンプルです
+        </h2>
+        <p class="mt-3 text-sm leading-7 text-gray-600 sm:text-base">
+          会員登録をして植物を選んだら、あとは日々の運動を記録するだけです。
+        </p>
+      </div>
+
+      <div class="grid gap-5 md:grid-cols-3">
+        <div class="rounded-3xl bg-gray-50 p-6">
+          <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-green-600 text-lg font-bold text-white">
+            1
+          </div>
+          <h3 class="text-xl font-bold text-gray-900">会員登録する</h3>
+          <p class="mt-3 text-sm leading-7 text-gray-600 sm:text-base">
+            メールアドレスとパスワードを入力して登録し、基本情報を設定します。
+          </p>
+        </div>
+
+        <div class="rounded-3xl bg-gray-50 p-6">
+          <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-green-600 text-lg font-bold text-white">
+            2
+          </div>
+          <h3 class="text-xl font-bold text-gray-900">植物を選ぶ</h3>
+          <p class="mt-3 text-sm leading-7 text-gray-600 sm:text-base">
+            育てたい植物を選ぶと、自分だけの育成がスタートします。
+          </p>
+        </div>
+
+        <div class="rounded-3xl bg-gray-50 p-6">
+          <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-green-600 text-lg font-bold text-white">
+            3
+          </div>
+          <h3 class="text-xl font-bold text-gray-900">運動を記録する</h3>
+          <p class="mt-3 text-sm leading-7 text-gray-600 sm:text-base">
+            散歩や筋トレの記録に応じてポイントが貯まり、植物が成長していきます。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="mt-8 flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm text-gray-600 underline sm:text-base">
       <a href="#">プライバシーポリシー</a>
       <a href="#">利用規約</a>
     </div>

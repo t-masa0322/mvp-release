@@ -1,50 +1,72 @@
-<main class="flex-1 bg-gray-100 py-10">
-  <div class="mx-auto w-full max-w-5xl px-4">
-    <h1 class="mb-8 text-2xl font-bold text-gray-800 sm:text-3xl">
-      運動履歴
-    </h1>
+<main class="flex-1 bg-gray-50 py-8 sm:py-10">
+  <div class="mx-auto w-full max-w-6xl px-4 sm:px-6">
+    <section class="rounded-[28px] border border-gray-200 bg-white p-6 shadow-[0_8px_30px_rgba(15,23,42,0.05)] sm:p-8 lg:p-10">
+      <div class="mb-8 flex flex-col gap-4 sm:mb-10 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p class="text-sm font-bold tracking-[0.2em] text-green-700">EXERCISE LOG</p>
+          <h1 class="mt-2 text-3xl font-extrabold text-gray-900 sm:text-5xl">
+            運動履歴
+          </h1>
+        </div>
 
-    <div class="mb-8 flex items-center justify-between">
-      <h2 class="text-3xl font-bold text-gray-800">
-        <%= @target_date.strftime("%Y年%-m月") %>
-      </h2>
+        <div class="flex items-center gap-3 self-start sm:self-auto">
+          <%= link_to "‹",
+                exercise_logs_path(month: @target_date.prev_month.strftime("%Y-%m")),
+                class: "inline-flex h-12 w-12 items-center justify-center rounded-full border border-gray-200 bg-white text-2xl font-bold text-gray-500 transition hover:border-green-200 hover:text-green-700" %>
 
-      <div class="flex gap-4 text-3xl">
-        <%= link_to "‹", exercise_logs_path(month: @target_date.prev_month.strftime("%Y-%m")), class: "text-gray-400 hover:text-gray-700" %>
-        <%= link_to "›", exercise_logs_path(month: @target_date.next_month.strftime("%Y-%m")), class: "text-gray-700 hover:text-black" %>
+          <div class="min-w-[180px] rounded-2xl bg-green-50 px-5 py-3 text-center">
+            <p class="text-2xl font-extrabold text-gray-900 sm:text-3xl">
+              <%= @target_date.strftime("%Y年%-m月") %>
+            </p>
+          </div>
+
+          <%= link_to "›",
+                exercise_logs_path(month: @target_date.next_month.strftime("%Y-%m")),
+                class: "inline-flex h-12 w-12 items-center justify-center rounded-full border border-gray-200 bg-white text-2xl font-bold text-gray-500 transition hover:border-green-200 hover:text-green-700" %>
+        </div>
       </div>
-    </div>
 
-    <div class="mb-4 grid grid-cols-7 text-center text-xl font-bold text-gray-500">
-      <div>日</div>
-      <div>月</div>
-      <div>火</div>
-      <div>水</div>
-      <div>木</div>
-      <div>金</div>
-      <div>土</div>
-    </div>
+      <div class="mb-3 grid grid-cols-7 gap-2 text-center sm:gap-3">
+        <div class="py-2 text-base font-bold text-gray-500 sm:text-2xl">日</div>
+        <div class="py-2 text-base font-bold text-gray-500 sm:text-2xl">月</div>
+        <div class="py-2 text-base font-bold text-gray-500 sm:text-2xl">火</div>
+        <div class="py-2 text-base font-bold text-gray-500 sm:text-2xl">水</div>
+        <div class="py-2 text-base font-bold text-gray-500 sm:text-2xl">木</div>
+        <div class="py-2 text-base font-bold text-gray-500 sm:text-2xl">金</div>
+        <div class="py-2 text-base font-bold text-gray-500 sm:text-2xl">土</div>
+      </div>
 
-    <div class="grid grid-cols-7 gap-3">
-      <% (@calendar_start..@calendar_end).each do |date| %>
-        <% in_month = date.month == @target_date.month %>
-        <% exercised = @exercise_dates.include?(date) %>
+      <div class="grid grid-cols-7 gap-2 sm:gap-3">
+        <% (@calendar_start..@calendar_end).each do |date| %>
+          <% in_month = date.month == @target_date.month %>
+          <% exercised = @exercise_dates.include?(date) %>
 
-        <%= link_to by_date_exercise_logs_path(date: date.to_s),
-              class: "min-h-[100px] rounded-2xl border border-gray-300 bg-white p-3 #{in_month ? 'text-gray-900' : 'text-gray-300'} hover:bg-gray-50" do %>
-          <div class="text-2xl font-bold"><%= date.day %></div>
+          <%= link_to by_date_exercise_logs_path(date: date.to_s),
+                class: "group block min-h-[100px] rounded-[24px] border px-3 py-3 transition sm:min-h-[130px] sm:px-4 sm:py-4 #{in_month ? 'border-gray-200 bg-white hover:border-green-200 hover:bg-green-50' : 'border-gray-100 bg-gray-50 text-gray-300'}" do %>
+            <div class="flex h-full flex-col justify-between">
+              <div class="text-left text-2xl font-extrabold sm:text-3xl <%= in_month ? 'text-gray-900' : 'text-gray-300' %>">
+                <%= date.day %>
+              </div>
 
-          <% if exercised %>
-            <div class="mt-4 text-center text-2xl">🏃</div>
+              <div class="flex justify-center pb-1">
+                <% if exercised %>
+                  <div class="inline-flex items-center rounded-full px-3 py-1 text-xs font-bold text-green-700 sm:text-sm">
+                    🏃‍♂️
+                  </div>
+                <% else %>
+                  <span class="h-7"></span>
+                <% end %>
+              </div>
+            </div>
           <% end %>
         <% end %>
-      <% end %>
-    </div>
+      </div>
 
-    <div class="mt-8">
-      <%= link_to "戻る",
-            home_path,
-            class: "inline-block rounded-lg bg-gray-600 px-5 py-3 font-bold text-white hover:bg-gray-700" %>
-    </div>
+      <div class="mt-8">
+        <%= link_to "戻る",
+              home_path,
+              class: "inline-flex items-center justify-center rounded-2xl bg-gray-600 px-6 py-4 text-lg font-bold text-white transition hover:bg-gray-700" %>
+      </div>
+    </section>
   </div>
 </main>
