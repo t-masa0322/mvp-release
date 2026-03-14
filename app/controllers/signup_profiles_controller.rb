@@ -12,7 +12,7 @@ class SignupProfilesController < ApplicationController
       session.delete(:signup_user_id)
       auto_login(@user)
       session[:initial_plant_selection] = true
-      redirect_to initial_plants_path, notice: "基本情報を登録しました。育てる植物を選んでください"
+      redirect_to initial_plants_path
     else
       flash.now[:alert] = @user.errors.full_messages.join(", ")
       render :edit, status: :unprocessable_entity

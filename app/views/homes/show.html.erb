@@ -1,88 +1,173 @@
-<main class="flex-1 bg-gray-100 py-10">
-  <div class="mx-auto w-full max-w-4xl px-4 space-y-8">
+<main class="flex-1 bg-[#f7f8f6] py-8 sm:py-10">
+  <div class="mx-auto w-full max-w-6xl px-4 sm:px-6">
+    <div class="space-y-6">
+      <section class="rounded-[32px] border border-gray-200/80 bg-white p-7 shadow-[0_10px_30px_rgba(15,23,42,0.04)] sm:p-9">
+        <div class="flex flex-col gap-8 xl:flex-row xl:items-start xl:justify-between">
+          <div class="min-w-0 flex-1">
+            <p class="text-[12px] font-semibold tracking-[0.24em] text-green-700/80">
+              TODAY'S LOG
+            </p>
 
-    <div class="rounded-2xl border border-gray-400 bg-white p-6 shadow-sm">
-      <h1 class="mb-6 text-2xl font-bold text-gray-800">今日の運動記録</h1>
+            <h1 class="mt-3 text-3xl font-bold tracking-tight text-slate-900 sm:text-5xl">
+              今日の運動記録
+            </h1>
 
-      <% if @today_exercise_logs.present? %>
-        <p class="mb-6 text-2xl font-bold text-gray-800">
-          今日の獲得ポイント <%= @today_earned_points %>pt
-        </p>
+            <% if @today_exercise_logs.present? %>
+              <div class="mt-8">
+                <p class="text-sm font-medium tracking-[0.18em] text-slate-400">
+                  TODAY'S POINTS
+                </p>
+                <div class="mt-3 flex flex-col gap-2 sm:flex-row sm:items-end sm:gap-4">
+                  <p class="text-2xl font-bold text-slate-900 sm:text-4xl">
+                    今日の獲得ポイント
+                  </p>
+                  <p class="text-4xl font-extrabold tracking-tight text-green-600 sm:text-6xl">
+                    <%= @today_earned_points %>pt
+                  </p>
+                </div>
+              </div>
 
-        <ul class="mb-8 list-disc pl-6 text-2xl font-bold text-green-600 space-y-2">
-          <% @today_exercise_logs.each do |exercise_log| %>
-            <li>
-              <%= exercise_type_label(exercise_log.exercise_type) %>
-              <%= exercise_log.duration_minutes %>分
-            </li>
-          <% end %>
-        </ul>
+              <div class="mt-8 flex flex-wrap gap-3">
+                <% @today_exercise_logs.each do |exercise_log| %>
+                  <div class="inline-flex items-center rounded-full bg-green-50 px-4 py-2 text-base font-semibold text-green-700 sm:text-lg">
+                    <span class="mr-2 text-green-500">•</span>
+                    <%= exercise_type_label(exercise_log.exercise_type) %>
+                    <span class="ml-2"><%= exercise_log.duration_minutes %>分</span>
+                  </div>
+                <% end %>
+              </div>
 
-        <p class="mb-8 text-2xl font-bold text-gray-800">
-          お疲れ様でした。
-        </p>
-      <% else %>
-        <p class="mb-8 text-lg text-gray-700">
-          今日はまだ運動記録がありません。
-        </p>
+              <p class="mt-8 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
+                お疲れ様でした。
+              </p>
+            <% else %>
+              <div class="mt-8 rounded-3xl bg-slate-50 px-6 py-7">
+                <p class="text-base leading-8 text-slate-600 sm:text-lg">
+                  今日はまだ運動記録がありません。<br>
+                  小さな一歩から、植物の成長を始めましょう。
+                </p>
+              </div>
+            <% end %>
+          </div>
+
+          <div class="w-full xl:max-w-[360px]">
+            <div class="grid gap-3">
+              <%= link_to "過去の運動履歴を見る",
+                    exercise_logs_path,
+                    class: "inline-flex w-full items-center justify-center rounded-2xl bg-green-600 px-6 py-4 text-base font-bold text-white transition hover:bg-green-700" %>
+
+              <%= link_to "今日の運動を記録する",
+                    new_exercise_log_path,
+                    class: "inline-flex w-full items-center justify-center rounded-2xl border border-slate-300 bg-white px-6 py-4 text-base font-bold text-slate-700 transition hover:border-green-200 hover:bg-green-50 hover:text-green-700" %>
+            </div>
+
+            <div class="mt-4 rounded-3xl border border-slate-200 bg-slate-50 px-5 py-5">
+              <p class="text-sm font-semibold text-slate-500">
+                続けるほど、植物が育ちます
+              </p>
+              <p class="mt-3 text-sm leading-7 text-slate-600">
+                毎日の運動を記録して、少しずつポイントを貯めましょう。積み重ねた分だけ植物の成長が見えてきます。
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <% if @current_user_plant.present? %>
+        <section class="rounded-[32px] border border-gray-200/80 bg-white p-7 shadow-[0_10px_30px_rgba(15,23,42,0.04)] sm:p-9">
+          <div class="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+            <div>
+              <p class="text-[12px] font-semibold tracking-[0.24em] text-green-700/80">
+                GROWING PLANT
+              </p>
+              <h2 class="mt-3 text-3xl font-bold tracking-tight text-slate-900 sm:text-5xl">
+                育成中の植物
+              </h2>
+            </div>
+
+            <% if @current_user_plant.next_stage.present? %>
+              <div class="rounded-3xl border border-green-100 bg-green-50 px-6 py-5 lg:min-w-[290px]">
+                <p class="text-sm font-semibold text-slate-500">
+                  次の成長までに必要なポイント
+                </p>
+                <p class="mt-3 text-4xl font-extrabold tracking-tight text-green-600">
+                  <%= @current_user_plant.points_to_next_stage %>pt
+                </p>
+              </div>
+            <% else %>
+              <div class="rounded-3xl border border-green-100 bg-green-50 px-6 py-5 lg:min-w-[290px]">
+                <p class="text-sm font-semibold text-slate-500">
+                  成長状況
+                </p>
+                <p class="mt-3 text-2xl font-bold tracking-tight text-green-600">
+                  最終段階まで成長しています
+                </p>
+              </div>
+            <% end %>
+          </div>
+
+          <div class="mt-10 grid gap-8 lg:grid-cols-[260px_1fr] lg:items-center">
+            <div class="flex justify-center lg:justify-start">
+              <div class="flex h-60 w-60 items-center justify-center rounded-[28px] bg-slate-50 ring-1 ring-slate-100">
+                <% if @current_user_plant.plant.image.attached? %>
+                  <%= image_tag @current_user_plant.plant.image,
+                        class: "h-48 w-48 object-contain sm:h-52 sm:w-52" %>
+                <% else %>
+                  <div class="flex h-44 w-44 items-center justify-center rounded-[24px] bg-white text-sm text-slate-500">
+                    植物の画像
+                  </div>
+                <% end %>
+              </div>
+            </div>
+
+            <div class="min-w-0">
+              <h3 class="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
+                <%= @current_user_plant.plant.name %>
+              </h3>
+
+              <p class="mt-4 text-xl text-slate-700 sm:text-2xl">
+                成長段階：
+                <span class="font-bold">
+                  <%= @current_user_plant.current_stage&.stage_order || "-" %>
+                  （<%= @current_user_plant.current_stage&.name || "未設定" %>）
+                </span>
+              </p>
+
+              <% if @current_user_plant.next_stage.present? %>
+                <% current_points = @current_user_plant.accumulated_points %>
+                <% next_points = @current_user_plant.next_stage.required_points %>
+                <% progress = next_points.positive? ? ((current_points.to_f / next_points) * 100).floor : 0 %>
+                <% progress = [[progress, 0].max, 100].min %>
+
+                <div class="mt-8 rounded-3xl bg-slate-50 px-6 py-5">
+                  <div class="mb-3 flex items-center justify-between gap-4 text-sm font-semibold text-slate-500 sm:text-base">
+                    <span>成長の進み具合</span>
+                    <span><%= current_points %> / <%= next_points %>pt</span>
+                  </div>
+
+                  <div class="h-4 rounded-full bg-white ring-1 ring-slate-100">
+                    <div
+                      class="h-4 rounded-full bg-gradient-to-r from-green-500 to-emerald-400 transition-all"
+                      style="width: <%= progress %>%"
+                    ></div>
+                  </div>
+                </div>
+              <% end %>
+
+              <div class="mt-8">
+                <%= link_to "他の植物にかえる",
+                      plants_path,
+                      class: "inline-flex items-center justify-center rounded-2xl bg-green-600 px-8 py-4 text-base font-bold text-white transition hover:bg-green-700" %>
+              </div>
+            </div>
+          </div>
+        </section>
       <% end %>
-
-      <div class="flex flex-col gap-4 sm:flex-row">
-        <%= link_to "過去の運動履歴を見る",
-              exercise_logs_path,
-              class: "inline-block rounded-lg bg-green-600 px-6 py-3 text-center font-bold text-white hover:bg-green-700" %>
-
-        <%= link_to "今日の運動を記録する",
-              new_exercise_log_path,
-              class: "inline-block rounded-lg bg-green-600 px-6 py-3 text-center font-bold text-white hover:bg-green-700" %>
-      </div>
     </div>
 
-    <% if @current_user_plant.present? %>
-      <div class="rounded-2xl border border-gray-400 bg-white p-6 shadow-sm">
-        <h2 class="mb-6 text-2xl font-bold text-gray-800">育成中の植物</h2>
-
-        <% if @current_user_plant.next_stage.present? %>
-          <div class="mb-6 text-right text-lg font-bold text-gray-800">
-            次の成長までに必要なポイント
-            <span class="ml-2 text-green-700"><%= @current_user_plant.points_to_next_stage %>pt</span>
-          </div>
-        <% else %>
-          <div class="mb-6 text-right text-lg font-bold text-green-700">
-            最終段階まで成長しています
-          </div>
-        <% end %>
-
-        <div class="mb-8 flex flex-col items-center gap-6 sm:flex-row sm:items-center">
-          <% if @current_user_plant.plant.image.attached? %>
-            <%= image_tag @current_user_plant.plant.image,
-                  class: "h-36 w-36 rounded-full object-cover" %>
-          <% else %>
-            <div class="flex h-36 w-36 items-center justify-center rounded-full bg-gray-200 text-sm text-gray-700">
-              植物の画像
-            </div>
-          <% end %>
-
-          <div class="text-center sm:text-left">
-            <p class="mb-3 text-2xl font-bold text-gray-800">
-              <%= @current_user_plant.plant.name %>
-            </p>
-
-            <p class="text-base text-gray-700">
-              成長段階：
-              <%= @current_user_plant.current_stage&.stage_order || "-" %>
-              （<%= @current_user_plant.current_stage&.name || "未設定" %>）
-            </p>
-          </div>
-        </div>
-
-        <div class="text-center">
-          <%= link_to "他の植物にかえる",
-                plants_path,
-                class: "inline-block rounded-lg bg-green-600 px-8 py-3 font-bold text-white hover:bg-green-700" %>
-        </div>
-      </div>
-    <% end %>
-
+    <div class="mt-8 flex flex-wrap justify-center gap-x-8 gap-y-4 pb-4 text-sm text-slate-500 underline sm:text-base">
+      <a href="#">プライバシーポリシー</a>
+      <a href="#">利用規約</a>
+    </div>
   </div>
 </main>

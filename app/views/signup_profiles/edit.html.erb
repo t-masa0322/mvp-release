@@ -1,37 +1,62 @@
-<main class="flex-1 bg-gray-100 py-10">
-  <div class="mx-auto w-full max-w-xl px-4">
-    <div class="rounded-2xl bg-white p-6 shadow-sm sm:p-8">
-      <h1 class="mb-6 text-center text-2xl font-bold text-green-700 sm:text-3xl">
-        基本情報入力
-      </h1>
-
-      <% if flash.now[:alert].present? %>
-        <div class="mb-4 rounded-lg bg-red-100 px-4 py-3 text-sm text-red-700">
-          <%= flash.now[:alert] %>
-        </div>
-      <% end %>
-
-      <%= form_with model: @user, url: signup_profile_path, method: :patch, local: true, class: "space-y-6" do |f| %>
-        <div>
-          <%= f.label :display_name, "ユーザー名", class: "mb-2 block text-sm font-bold text-gray-700" %>
-          <%= f.text_field :display_name, class: "w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-500 focus:outline-none" %>
+<main class="flex-1 bg-[#f7f8f6] py-8 sm:py-10">
+  <div class="mx-auto w-full max-w-4xl px-4 sm:px-6">
+    <section class="rounded-[32px] border border-gray-200/80 bg-white p-6 shadow-[0_10px_30px_rgba(15,23,42,0.04)] sm:p-8 lg:p-10">
+      <div class="mx-auto max-w-3xl">
+        <div class="mb-8 text-center">
+          <p class="text-[12px] font-semibold tracking-[0.24em] text-green-700/80">
+            PROFILE
+          </p>
+          <h1 class="mt-3 text-3xl font-bold tracking-tight text-slate-900 sm:text-5xl">
+            基本情報入力
+          </h1>
+          <p class="mt-4 text-sm leading-7 text-slate-600 sm:text-base">
+            アプリ内で表示される名前とユーザーIDを設定しよう。
+          </p>
         </div>
 
-        <div>
-          <div class="mb-2 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
-            <%= f.label :name, "ユーザーID", class: "text-sm font-bold text-gray-700" %>
-            <span class="text-xs text-gray-500 sm:text-sm">
-              ※IDは登録後に変更できません。
-            </span>
+        <% if flash.now[:alert].present? %>
+          <div class="mb-6 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-semibold text-red-700">
+            <%= flash.now[:alert] %>
+          </div>
+        <% end %>
+
+        <%= form_with model: @user,
+              url: signup_profile_path,
+              method: :patch,
+              local: true,
+              data: { turbo: false },
+              class: "space-y-8" do |f| %>
+
+          <div>
+            <%= f.label :display_name, "ユーザー名", class: "mb-3 block text-lg font-bold text-slate-800" %>
+            <%= f.text_field :display_name,
+                  class: "w-full rounded-2xl border border-slate-300 bg-white px-5 py-4 text-lg text-slate-900 placeholder:text-slate-400 focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-100" %>
+            <p class="mt-2 text-sm text-slate-500">
+              投稿や画面上で表示される名前です。
+            </p>
           </div>
 
-          <%= f.text_field :name, class: "w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-500 focus:outline-none" %>
-        </div>
+          <div>
+            <div class="mb-3 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+              <%= f.label :name, "ユーザーID", class: "text-lg font-bold text-slate-800" %>
+              <span class="text-sm text-slate-500">
+                ※IDは登録後に変更できません。
+              </span>
+            </div>
 
-        <div>
-          <%= f.submit "登録する", class: "w-full rounded-lg bg-green-600 px-4 py-3 font-bold text-white hover:bg-green-700" %>
-        </div>
-      <% end %>
-    </div>
+            <%= f.text_field :name,
+                  class: "w-full rounded-2xl border border-slate-300 bg-white px-5 py-4 text-lg text-slate-900 placeholder:text-slate-400 focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-100" %>
+            <p class="mt-2 text-sm text-slate-500">
+              半角英数字で入力してください。
+            </p>
+          </div>
+
+          <div class="pt-2">
+            <%= f.submit "登録する",
+                  class: "inline-flex w-full items-center justify-center rounded-2xl bg-green-600 px-6 py-4 text-lg font-bold text-white transition hover:bg-green-700" %>
+          </div>
+        <% end %>
+      </div>
+    </section>
   </div>
 </main>
